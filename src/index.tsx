@@ -14,7 +14,9 @@ import Intro from "./Intro";
 import Task1 from "./task1";
 import Task2 from "./task2";
 import Task3 from "./task3";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient()
 
 const Menu: FunctionComponent = () => {
   return (
@@ -131,26 +133,28 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route
-        path=""
-        element={
-          <Container>
-            <Intro />
-          </Container>
-        }
-      />
-      <Route
-        path="task/:id"
-        element={
-          <Container>
-            <Task />
-          </Container>
-        }
-      />
+  <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path=""
+            element={
+              <Container>
+                <Intro />
+              </Container>
+            }
+            />
+          <Route
+            path="task/:id"
+            element={
+              <Container>
+                <Task />
+              </Container>
+            }
+            />
 
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  </BrowserRouter>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
 );
