@@ -1,0 +1,7 @@
+{
+    "extends": ["@uniwise/eslint-config"],
+    "rules": {
+      // Custom rules here
+    }
+  }
+  
