@@ -47,7 +47,7 @@ const StyledLabel = styled.label<TInput>`
 const Input: FC<TInput> = ({ label, ...props }) => {
   return (
     <InputContainer>
-      <StyledLabel htmlFor={props.id}>{label || "Input Label"}</StyledLabel>
+      {label && <StyledLabel htmlFor={props.id}>{label}</StyledLabel>}
       <StyledInput {...props} />
     </InputContainer>
   );

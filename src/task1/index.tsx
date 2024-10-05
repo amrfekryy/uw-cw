@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import "./index.scss";
 import { useFetch, useFetchTanstack } from "./hooks/useFetch";
+import Input from "../components/Input";
+import Card from "../components/Card";
 
 const URL = `https://api.github.com/users?per_page=${100}`;
 
@@ -43,7 +45,7 @@ const Task1: FC = () => {
   return (
     <div className="dashboard">
       {/* show the input search here */}
-      <input
+      <Input
         placeholder="Search by username"
         onChange={(e) => setSearchTerm(e.target.value)}
         value={searchTerm}
@@ -59,32 +61,30 @@ const Task1: FC = () => {
       ) : (
         <ul>
           {!filteredUsers.length ? (
-            <li
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Oops! No users found.
+            <li>
+              <Card style={{ textAlign: "center" }}>Oops! No users found.</Card>
             </li>
           ) : (
             filteredUsers.map((user: User) => {
               return (
-                <li
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
-                  <img
-                    src={user.avatar_url}
+                <li>
+                  <Card
                     style={{
-                      borderRadius: "100%",
-                      width: "3rem",
-                      height: "3rem",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
                     }}
-                  />
-                  <span>{user.login}</span>
+                  >
+                    <img
+                      src={user.avatar_url}
+                      style={{
+                        borderRadius: "100%",
+                        width: "3rem",
+                        height: "3rem",
+                      }}
+                    />
+                    <span>{user.login}</span>
+                  </Card>
                 </li>
               );
             })

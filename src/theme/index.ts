@@ -5,7 +5,7 @@ export const lightTheme: ITheme = {
   colors: {
     primary: "#007bff",
     primaryHover: "#0056b3",
-    secondary: "#f5f5f5",
+    secondary: "#f9f9f9",
     secondaryHover: "#e0e0e0",
     text: "#333333",
     border: "#cccccc",
