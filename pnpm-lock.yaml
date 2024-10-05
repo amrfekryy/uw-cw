@@ -8,6 +8,9 @@ dependencies:
   '@emotion/react':
     specifier: ^11.13.3
     version: 11.13.3(@types/react@18.3.11)(react@18.3.1)
+  '@fortawesome/fontawesome-free':
+    specifier: ^6.6.0
+    version: 6.6.0
   '@hookform/resolvers':
     specifier: ^3.9.0
     version: 3.9.0(react-hook-form@7.53.0)
@@ -682,6 +685,11 @@ packages:
     dependencies:
       levn: 0.4.1
     dev: true
+
+  /@fortawesome/fontawesome-free@6.6.0:
+    resolution: {integrity: sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==}
+    engines: {node: '>=6'}
+    dev: false
 
   /@hookform/resolvers@3.9.0(react-hook-form@7.53.0):
     resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}

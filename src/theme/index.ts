@@ -1,4 +1,4 @@
-import { ITheme } from "./theme";
+import { ITheme } from "./emotion";
 
 // Create a lightTheme object
 export const lightTheme: ITheme = {
