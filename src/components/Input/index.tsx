@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC, InputHTMLAttributes } from "react";
+import { FC, InputHTMLAttributes, forwardRef } from "react";
 
 type TInput = {
   label?: string;
@@ -36,7 +36,6 @@ const StyledInput = styled.input<TInput>`
   }
 `;
 
-// Define the styled label
 const StyledLabel = styled.label<TInput>`
   display: block;
   margin-bottom: 5px;
@@ -44,13 +43,17 @@ const StyledLabel = styled.label<TInput>`
   font-size: 0.9rem;
 `;
 
-const Input: FC<TInput> = ({ label, ...props }) => {
+// Define the Input component using forwardRef
+const Input = forwardRef<HTMLInputElement, TInput>(({ label, ...props }, ref) => {
   return (
     <InputContainer>
       {label && <StyledLabel htmlFor={props.id}>{label}</StyledLabel>}
-      <StyledInput {...props} />
+      <StyledInput ref={ref} {...props} />
     </InputContainer>
   );
-};
+});
+
+// Set displayName for easier debugging
+Input.displayName = "Input";
 
 export default Input;

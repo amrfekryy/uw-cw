@@ -1,12 +1,9 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { FC, ButtonHTMLAttributes } from "react";
 
-// Define the type for the button
-type TButton = {
+// Extend the button props to include all possible HTML button attributes
+type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string;
-  onClick: () => void;
-  disabled?: boolean;
-  ariaLabel?: string;
   variant?: "primary" | "secondary";
 };
 
@@ -19,7 +16,7 @@ const StyledButton = styled.button<TButton>`
   cursor: pointer;
   background-color: ${({ theme, variant }) =>
     variant === "primary" ? theme.colors.primary : theme.colors.secondary};
-  color: ${({ theme }) => theme.colors.text};
+  color: #f5f5f5;
   transition: background-color 0.3s ease;
 
   &:hover {
@@ -41,20 +38,20 @@ const StyledButton = styled.button<TButton>`
 `;
 
 const Button: FC<TButton> = ({
-  text,
+  children,
   onClick,
   disabled,
-  ariaLabel,
   variant = "primary",
+  ...props
 }) => {
   return (
     <StyledButton
       onClick={onClick}
       disabled={disabled}
-      aria-label={ariaLabel || text}
       variant={variant}
+      {...props}
     >
-      {text || "Click Here"}
+      {children}
     </StyledButton>
   );
 };

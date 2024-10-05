@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Input from "../components/Input";
 import * as z from "zod";
+import Button from "../components/Button";
 
 interface FormData {
   firstName: string;
@@ -83,13 +85,11 @@ const Task3: React.FC = () => {
           {step === 0 && (
             <div>
               <div>
-                <label>First Name:</label>
-                <input {...methods.register("firstName")} />
+                <Input label="First Name" {...methods.register("firstName")} />
                 <p>{methods.formState.errors.firstName?.message}</p>
               </div>
               <div>
-                <label>Last Name:</label>
-                <input {...methods.register("lastName")} />
+                <Input label="Last Name" {...methods.register("lastName")} />
                 <p>{methods.formState.errors.lastName?.message}</p>
               </div>
             </div>
@@ -98,8 +98,7 @@ const Task3: React.FC = () => {
           {step === 1 && (
             <div>
               <div>
-                <label>Age:</label>
-                <input type="number" {...methods.register("age")} />
+                <Input label="Age" type="number" {...methods.register("age")} />
                 <p>{methods.formState.errors.age?.message}</p>
               </div>
               <div>
@@ -117,8 +116,7 @@ const Task3: React.FC = () => {
 
               {showStateField && (
                 <div>
-                  <label>State:</label>
-                  <input {...methods.register("state")} />
+                  <Input label="State" {...methods.register("state")} />
                 </div>
               )}
             </div>
@@ -136,15 +134,23 @@ const Task3: React.FC = () => {
             </div>
           )}
 
-          <div className="form-navigation">
-            {step > 0 && (
-              <button type="button" onClick={onPreviousStep}>
-                Back
-              </button>
-            )}
-            <button type="submit" disabled={loading}>
+          <div
+            className="form-navigation"
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button type="submit" disabled={loading}>
               {step === 2 ? "Submit" : "Next"}
-            </button>
+            </Button>
+            {step > 0 && (
+              <Button type="button" onClick={onPreviousStep}>
+                Back
+              </Button>
+            )}
           </div>
         </form>
       </FormProvider>

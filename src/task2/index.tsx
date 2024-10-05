@@ -27,7 +27,7 @@ const App: FC = () => {
         type="text"
         placeholder="Enter your username"
       />
-      <Button text="Click Me" onClick={() => alert("Button Clicked!")} />
+      <Button onClick={() => alert("Button Clicked!")}>Click Me</Button>
     </div>
   );
 };
