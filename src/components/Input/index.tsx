@@ -7,7 +7,7 @@ type TInput = {
   helperText?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   margin-bottom: 15px;
   width: 100%;
 `;
@@ -42,14 +42,14 @@ const StyledInput = styled.input<TInput>`
   }
 `;
 
-const StyledLabel = styled.label<TInput>`
+export const StyledLabel = styled.label<TInput>`
   display: block;
   margin-bottom: 5px;
   color: ${({ theme }) => theme.colors.text};
   font-size: 0.9rem;
 `;
 
-const StyledHelperText = styled.p<TInput>`
+export const StyledHelperText = styled.p<TInput>`
   margin-top: 3px;
   display: block;
   color: ${({ theme, error }) =>

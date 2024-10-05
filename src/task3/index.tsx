@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import Input from "../components/Input";
+import Input, { StyledHelperText } from "../components/Input";
 import * as z from "zod";
 import Button from "../components/Button";
+import Select from "../components/Select";
 
 interface FormData {
   firstName: string;
   lastName: string;
   age: number;
   country: string;
-  state?: string;
+  city: string;
+  address?: string;
   consent: boolean;
 }
 
@@ -19,7 +21,8 @@ const defaultValues = {
   lastName: "",
   age: 0,
   country: "",
-  state: "",
+  city: "",
+  address: "",
   consent: false,
 };
 
@@ -35,7 +38,8 @@ const stepTwoSchema = z.object({
     z.number().min(18, "You must be at least 18").positive()
   ),
   country: z.string().min(1, "Country is required"),
-  state: z.string().optional(),
+  city: z.string().min(1, "City is required"),
+  address: z.string().optional(),
 });
 
 const stepThreeSchema = z.object({
@@ -46,16 +50,28 @@ const stepThreeSchema = z.object({
 
 const validationSchemas = [stepOneSchema, stepTwoSchema, stepThreeSchema];
 
+const countries = [
+  {
+    country: "Egypt",
+    cities: ["Cairo", "Giza", "Luxor"],
+  },
+  {
+    country: "England",
+    cities: ["London", "Liverpool", "Manchester"],
+  },
+];
+
 const Task3: React.FC = () => {
   const [step, setStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const [showStateField, setShowStateField] = useState<boolean>(false);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(validationSchemas[step]),
     mode: "onTouched",
     defaultValues,
   });
+
+  const { country, city } = methods.watch();
 
   const onNextStep = () => {
     setStep((prevStep) => prevStep + 1);
@@ -105,21 +121,36 @@ const Task3: React.FC = () => {
                 {...methods.register("age")}
                 helperText={methods.formState.errors.age?.message}
               />
-              <div>
-                <label>Country:</label>
-                <select
-                  {...methods.register("country")}
-                  onChange={(e) => setShowStateField(!!e.target.value)}
+              <Select
+                label="Country"
+                {...methods.register("country")}
+                helperText={methods.formState.errors.country?.message}
+              >
+                <option value="">Select</option>
+                {countries.map((o) => (
+                  <option value={o.country}>{o.country}</option>
+                ))}
+              </Select>
+
+              {country && (
+                <Select
+                  label="City"
+                  {...methods.register("city")}
+                  helperText={methods.formState.errors.city?.message}
                 >
                   <option value="">Select</option>
-                  <option value="USA">USA</option>
-                  <option value="Canada">Canada</option>
-                </select>
-                <p>{methods.formState.errors.country?.message}</p>
-              </div>
-
-              {showStateField && (
-                <Input label="State" {...methods.register("state")} />
+                  {countries
+                    .find((o) => o.country === country)
+                    ?.cities.map((city) => (
+                      <option value={city}>{city}</option>
+                    ))}
+                </Select>
+              )}
+              {city && (
+                <Input
+                  label="Address (Optional)"
+                  {...methods.register("address")}
+                />
               )}
             </div>
           )}
@@ -131,7 +162,11 @@ const Task3: React.FC = () => {
                   <input type="checkbox" {...methods.register("consent")} />I
                   agree to the terms and conditions
                 </label>
-                <p>{methods.formState.errors.consent?.message}</p>
+                <StyledHelperText
+                  error={!!methods.formState.errors.consent?.message}
+                >
+                  {methods.formState.errors.consent?.message}
+                </StyledHelperText>
               </div>
             </div>
           )}
