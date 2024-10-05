@@ -84,23 +84,27 @@ const Task3: React.FC = () => {
         >
           {step === 0 && (
             <div>
-              <div>
-                <Input label="First Name" {...methods.register("firstName")} />
-                <p>{methods.formState.errors.firstName?.message}</p>
-              </div>
-              <div>
-                <Input label="Last Name" {...methods.register("lastName")} />
-                <p>{methods.formState.errors.lastName?.message}</p>
-              </div>
+              <Input
+                label="First Name"
+                {...methods.register("firstName")}
+                helperText={methods.formState.errors.firstName?.message}
+              />
+              <Input
+                label="Last Name"
+                {...methods.register("lastName")}
+                helperText={methods.formState.errors.lastName?.message}
+              />
             </div>
           )}
 
           {step === 1 && (
             <div>
-              <div>
-                <Input label="Age" type="number" {...methods.register("age")} />
-                <p>{methods.formState.errors.age?.message}</p>
-              </div>
+              <Input
+                label="Age"
+                type="number"
+                {...methods.register("age")}
+                helperText={methods.formState.errors.age?.message}
+              />
               <div>
                 <label>Country:</label>
                 <select
@@ -115,9 +119,7 @@ const Task3: React.FC = () => {
               </div>
 
               {showStateField && (
-                <div>
-                  <Input label="State" {...methods.register("state")} />
-                </div>
+                <Input label="State" {...methods.register("state")} />
               )}
             </div>
           )}

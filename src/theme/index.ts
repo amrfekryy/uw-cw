@@ -12,6 +12,7 @@ export const lightTheme: ITheme = {
     borderHover: "#999999",
     borderFocus: "#007bff",
     background: "#fff",
+    error: "#D9534F",
   },
 };
 
@@ -27,5 +28,6 @@ export const darkTheme: ITheme = {
     borderHover: "#888888",
     borderFocus: "#007bff",
     background: "#222",
+    error: "#FFB2B2",
   },
 };

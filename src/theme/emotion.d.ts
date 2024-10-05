@@ -11,6 +11,7 @@ export type ITheme = {
     border: string,
     borderHover: string,
     borderFocus: string,
+    error: string
   };
 };
 
