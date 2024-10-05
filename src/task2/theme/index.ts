@@ -1,34 +1,31 @@
-export type Theme = {
-    colors: {
-      primary: string;
-      secondary: string;
-      primaryHover: string;
-      secondaryHover: string;
-      text: string;
-      background: string;
-    };
-  };
-  
+import { ITheme } from "./theme";
+
 // Create a lightTheme object
-export const lightTheme: Theme = {
+export const lightTheme: ITheme = {
   colors: {
     primary: "#007bff",
-    secondary: "#6c757d",
     primaryHover: "#0056b3",
-    secondaryHover: "#5a6268",
-    text: "#000",
+    secondary: "#f5f5f5",
+    secondaryHover: "#e0e0e0",
+    text: "#333333",
+    border: "#cccccc",
+    borderHover: "#999999",
+    borderFocus: "#007bff",
     background: "#fff",
   },
 };
 
 // Create a darkTheme object
-export const darkTheme: Theme = {
+export const darkTheme: ITheme = {
   colors: {
-    primary: "#1f6feb",
-    secondary: "#4e5d6c",
-    primaryHover: "#144293",
-    secondaryHover: "#394451",
-    text: "#fff",
+    primary: "#007bff",
+    primaryHover: "#0056b3",
+    secondary: "#444444",
+    secondaryHover: "#666666",
+    text: "#f5f5f5",
+    border: "#555555",
+    borderHover: "#888888",
+    borderFocus: "#007bff",
     background: "#222",
   },
 };
