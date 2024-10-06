@@ -7,8 +7,8 @@ type TCard = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const StyledCard = styled.div<TCard>`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors?.secondary};
+  color: ${({ theme }) => theme.colors?.text};
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ddd;

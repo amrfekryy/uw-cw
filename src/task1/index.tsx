@@ -49,7 +49,7 @@ const Task1: FC = () => {
           ) : (
             data?.map((user: User) => {
               return (
-                <li>
+                <li key={user.login}>
                   <Card
                     style={{
                       display: "flex",

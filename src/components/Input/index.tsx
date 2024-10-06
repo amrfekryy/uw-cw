@@ -17,25 +17,25 @@ const StyledInput = styled.input<TInput>`
   padding: 6px;
   font-size: 1rem;
   border: 1px solid
-    ${({ theme, error }) => (error ? theme.colors.error : theme.colors.border)};
+    ${({ theme, error }) => (error ? theme.colors?.error : theme.colors?.border)};
   border-radius: 5px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     border-color: ${({ theme, error }) =>
-      error ? theme.colors.error : theme.colors.borderHover};
+      error ? theme.colors?.error : theme.colors?.borderHover};
   }
 
   &:focus {
     border-color: ${({ theme, error }) =>
-      error ? theme.colors.error : theme.colors.borderFocus};
+      error ? theme.colors?.error : theme.colors?.borderFocus};
     outline: none;
     box-shadow: 0 0 5px
-      ${({ theme, error }) => (error ? theme.colors.error  : theme.colors.borderFocus)};
+      ${({ theme, error }) => (error ? theme.colors?.error  : theme.colors?.borderFocus)};
   }
 
-  color: ${({ theme }) => theme.colors.text};
-  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors?.text};
+  background-color: ${({ theme }) => theme.colors?.background};
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -45,7 +45,7 @@ const StyledInput = styled.input<TInput>`
 export const StyledLabel = styled.label<TInput>`
   display: block;
   margin-bottom: 5px;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors?.text};
   font-size: 0.9rem;
 `;
 
@@ -53,7 +53,7 @@ export const StyledHelperText = styled.p<TInput>`
   margin-top: 3px;
   display: block;
   color: ${({ theme, error }) =>
-    error ? theme.colors.error : theme.colors.text};
+    error ? theme.colors?.error : theme.colors?.text};
   font-size: 0.7rem;
 `;
 
