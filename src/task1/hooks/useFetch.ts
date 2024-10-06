@@ -43,6 +43,8 @@ export const useFetch = (url: string) => {
       console.log("fetchData");
       try {
         setIsLoading(true);
+
+        await fetchMockUsers([]) // simulate a delay to see the loading indicator
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Network response was not ok");
