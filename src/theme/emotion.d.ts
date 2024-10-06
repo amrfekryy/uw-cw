@@ -1,6 +1,7 @@
 import "@emotion/react";
 
 export type ITheme = {
+  mode: "light" | "dark";
   colors: {
     primary: string;
     secondary: string;
@@ -8,10 +9,10 @@ export type ITheme = {
     secondaryHover: string;
     text: string;
     background: string;
-    border: string,
-    borderHover: string,
-    borderFocus: string,
-    error: string
+    border: string;
+    borderHover: string;
+    borderFocus: string;
+    error: string;
   };
 };
 

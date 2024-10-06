@@ -9,14 +9,14 @@ type TCard = {
 const StyledCard = styled.div<TCard>`
   background-color: ${({ theme }) => theme.colors?.secondary};
   color: ${({ theme }) => theme.colors?.text};
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${({ theme }) => theme.mode === 'light' ? '#ddd' : '#777'};
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 
   @media (max-width: 768px) {
-    padding: 15px;
+    padding: 10px;
     width: 100%;
   }
 `;

@@ -2,6 +2,7 @@ import { ITheme } from "./emotion";
 
 // Create a lightTheme object
 export const lightTheme: ITheme = {
+  mode: "light",
   colors: {
     primary: "#007bff",
     primaryHover: "#0056b3",
@@ -18,6 +19,7 @@ export const lightTheme: ITheme = {
 
 // Create a darkTheme object
 export const darkTheme: ITheme = {
+  mode: "dark",
   colors: {
     primary: "#007bff",
     primaryHover: "#0056b3",
