@@ -34,35 +34,8 @@ export const fetchMockUsers = async (users: User[]): Promise<User[]> => {
 
 export const useFetch = (url: string) => {
   const [data, setData] = useState<User[] | null>(null);
-  const [filterdData, setFilteredData] = useState<User[] | null>(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [base, query] = url.split("&query=");
-
-  useEffect(() => {
-    // this is a simulation of the filtering through the query search param
-    // this was implemented to make the seach function with a "like" operator
-    // since the provided api doesn't provide this funcitonality and the url
-    // https://api.github.com/users/username only returns one user
-    const filterData = async () => {
-      if (!data) return;
-
-      setIsLoading(true);
-
-      // filter users by query search param
-      const filteredUsers = !query
-        ? data
-        : data?.filter((user) => user.login.includes(query));
-
-      const awaitedFilteredUsers = await fetchMockUsers(filteredUsers);
-
-      setFilteredData(awaitedFilteredUsers);
-      setIsLoading(false);
-    };
-
-    filterData();
-  }, [query, data]);
 
   useEffect(() => {
     // this is the real data fetch. it only triggers the first time since the base url never changes
@@ -70,7 +43,7 @@ export const useFetch = (url: string) => {
       console.log("fetchData");
       try {
         setIsLoading(true);
-        const response = await fetch(base);
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -85,9 +58,9 @@ export const useFetch = (url: string) => {
     };
 
     fetchData();
-  }, [base]);
+  }, [url]);
 
-  return { data: filterdData || data, isLoading, error };
+  return { data, isLoading, error };
 };
 
 export const useFetchTanstack = (url: string) => {

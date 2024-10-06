@@ -15,14 +15,15 @@ const Task1: FC = () => {
   // debounce the search term input with a 500ms delay
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const {
-    data = [],
-    error,
-    isLoading,
-  } = useFetch(`${URL}?per_page=${100}&query=${debouncedSearchTerm}`);
+  const { data = [], error, isLoading } = useFetch(URL);
 
   // we can also use Tanstack query
   // const { data = [], error, isLoading } = useFetchTanstack(URL);
+
+  // filter users by query search param
+  const filteredUsers = !debouncedSearchTerm
+    ? data
+    : data?.filter((user) => user.login.includes(debouncedSearchTerm));
 
   return (
     <div className="dashboard">
@@ -42,12 +43,12 @@ const Task1: FC = () => {
         <div>Something went wrong!</div>
       ) : (
         <ul>
-          {!data?.length ? (
+          {!filteredUsers?.length ? (
             <li>
               <Card style={{ textAlign: "center" }}>Oops! No users found.</Card>
             </li>
           ) : (
-            data?.map((user: User) => {
+            filteredUsers?.map((user: User) => {
               return (
                 <li key={user.login}>
                   <Card
