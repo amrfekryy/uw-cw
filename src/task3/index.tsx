@@ -63,7 +63,8 @@ const countries = [
 
 const Task3: React.FC = () => {
   const [step, setStep] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(validationSchemas[step]),
@@ -83,15 +84,17 @@ const Task3: React.FC = () => {
 
   const onSubmit = async () => {
     // simulate form submission
-    setLoading(true);
+    setSubmitting(true);
     setTimeout(() => {
       console.log("Form submitted:", methods.getValues());
-      setLoading(false);
-      alert("Form successfully submitted!");
+      setSubmitting(false);
+      setSubmitted(true);
     }, 2000);
   };
 
-  return (
+  return submitted ? (
+    <div style={{ textAlign: "center" }}>Thank You!</div>
+  ) : (
     <div className="multi-step-form">
       <h2>Step {step + 1} of 3</h2>
       <FormProvider {...methods}>
@@ -180,8 +183,8 @@ const Task3: React.FC = () => {
               justifyContent: "space-between",
             }}
           >
-            <Button type="submit" disabled={loading}>
-              {step === 2 ? "Submit" : "Next"}
+            <Button type="submit" disabled={submitting}>
+              {step === 2 ? (submitting ? "Submitting" : "Submit") : "Next"}
             </Button>
             {step > 0 && (
               <Button type="button" onClick={onPreviousStep}>
@@ -191,8 +194,6 @@ const Task3: React.FC = () => {
           </div>
         </form>
       </FormProvider>
-
-      {loading && <p>Loading...</p>}
     </div>
   );
 };
