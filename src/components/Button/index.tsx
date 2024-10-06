@@ -3,7 +3,6 @@ import { FC, ButtonHTMLAttributes } from "react";
 
 // Extend the button props to include all possible HTML button attributes
 type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
-  text?: string;
   variant?: "primary" | "secondary";
 };
 
@@ -15,15 +14,15 @@ const StyledButton = styled.button<TButton>`
   border-radius: 5px;
   cursor: pointer;
   background-color: ${({ theme, variant }) =>
-    variant === "primary" ? theme.colors.primary : theme.colors.secondary};
+    variant === "primary" ? theme.colors?.primary : theme.colors?.secondary};
   color: #f5f5f5;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${({ theme, variant }) =>
       variant === "primary"
-        ? theme.colors.primaryHover
-        : theme.colors.secondaryHover};
+        ? theme.colors?.primaryHover
+        : theme.colors?.secondaryHover};
   }
 
   &:disabled {
