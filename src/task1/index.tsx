@@ -1,46 +1,24 @@
 import React, { FC } from "react";
 import "./index.scss";
-import { useFetch, useFetchTanstack } from "./hooks/useFetch";
+import { useFetch, useFetchTanstack, User } from "./hooks/useFetch";
 import Input from "../components/Input";
 import Card from "../components/Card";
 
 const URL = `https://api.github.com/users?per_page=${100}`;
 
-interface User {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: string;
-  gravatar_id: string;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
-  type: string;
-  site_admin: boolean;
-}
-
 const Task1: FC = () => {
   // Use this api endpoint to get a list of users
   // https://api.github.com/users
 
-  const { data = [], error, isLoading } = useFetch(URL);
-  // const { data = [], error, isLoading } = useFetchTanstack(URL);
-
   const [searchTerm, setSearchTerm] = React.useState("");
+  const {
+    data = [],
+    error,
+    isLoading,
+  } = useFetch(`${URL}?per_page=${100}&query=${searchTerm}`);
 
-  // filter users by search term
-  const filteredUsers =
-    (!searchTerm
-      ? data
-      : data?.filter((user: User) => user.login.includes(searchTerm))) || [];
+  // we can also use Tanstack query
+  // const { data = [], error, isLoading } = useFetchTanstack(URL);
 
   return (
     <div className="dashboard">
@@ -60,12 +38,12 @@ const Task1: FC = () => {
         <div>Something went wrong!</div>
       ) : (
         <ul>
-          {!filteredUsers.length ? (
+          {!data?.length ? (
             <li>
               <Card style={{ textAlign: "center" }}>Oops! No users found.</Card>
             </li>
           ) : (
-            filteredUsers.map((user: User) => {
+            data?.map((user: User) => {
               return (
                 <li>
                   <Card
