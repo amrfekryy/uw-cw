@@ -63,8 +63,6 @@ describe("Task1 Component", () => {
     const input = screen.getByPlaceholderText("Search by username");
     fireEvent.change(input, { target: { value: "user1" } });
 
-    await new Promise((r) => setTimeout(r, 2000));
-
     await waitFor(() => {
       expect(screen.queryByText("user1")).not.toBeNull();
       expect(screen.queryByText("user2")).toBeNull();
