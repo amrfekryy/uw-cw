@@ -3,6 +3,7 @@ import "./index.scss";
 import { useFetch, useFetchTanstack, User } from "./hooks/useFetch";
 import Input from "../components/Input";
 import Card from "../components/Card";
+import useDebounce from "./hooks/useDebounce";
 
 const URL = `https://api.github.com/users?per_page=${100}`;
 
@@ -11,11 +12,14 @@ const Task1: FC = () => {
   // https://api.github.com/users
 
   const [searchTerm, setSearchTerm] = React.useState("");
+  // debounce the search term input with a 500ms delay
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
   const {
     data = [],
     error,
     isLoading,
-  } = useFetch(`${URL}?per_page=${100}&query=${searchTerm}`);
+  } = useFetch(`${URL}?per_page=${100}&query=${debouncedSearchTerm}`);
 
   // we can also use Tanstack query
   // const { data = [], error, isLoading } = useFetchTanstack(URL);
